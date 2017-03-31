@@ -13,7 +13,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var moviesTableView: UITableView!
     var movieHelper = Movies()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let activityIndicator = ActivityIndicator()
     let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -29,11 +29,6 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.getMoviesAndUpdateTable()
         
-        //var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
-        self.activityIndicator.center = self.view.center
-        self.activityIndicator.hidesWhenStopped = true
-        self.view.addSubview(self.activityIndicator)
-        
     }
     
     func refreshControlEvent()  {
@@ -41,11 +36,12 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func presentIndicator()  {
-        self.activityIndicator.startAnimating()
+        self.activityIndicator.showActivityIndicator(uiView: (self.tabBarController?.view)!)
+        //self.activityIndicator.startAnimating()
     }
     
     func hideIndicator()  {
-        self.activityIndicator.stopAnimating()
+        self.activityIndicator.hideActivityIndicator(view: (self.tabBarController?.view)!)
     }
     
     
@@ -56,6 +52,13 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if error != nil {
                 // Present error dialog here..
                 print(error!.localizedDescription)
+                let alertView = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                
+                let okActionButton: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alertView.addAction(okActionButton)
+                
+                self?.present(alertView, animated: true, completion: nil)
+                
             } else {
                 print("Movies returned \(movies.count)")
                 self?.moviesTableView.reloadData()
