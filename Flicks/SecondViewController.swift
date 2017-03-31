@@ -8,16 +8,32 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+class SecondViewController: MovieDisplayViewController {
+    
+    
+    override func getMoviesAndUpdateTable() {
+        movieHelper.getTopRatedMovies { [weak self] (moviesFromResponse, error) in
+            
+            if error != nil {
+                // Present error dialog here..
+                print(error!.localizedDescription)
+                let alertView = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                
+                let okActionButton: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alertView.addAction(okActionButton)
+                
+                self?.present(alertView, animated: true, completion: nil)
+                
+            } else {
+                print("Movies returned \(moviesFromResponse.count)")
+                self?.movies = moviesFromResponse
+                self?.moviesTableView.reloadData()
+            }
+            
+            self?.hideIndicator()
+            self?.refreshControl.endRefreshing()
+        }
     }
 
 
