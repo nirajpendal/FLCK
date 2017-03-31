@@ -3,7 +3,7 @@
 //  Flicks
 //
 //  Created by Niraj Pendal on 3/30/17.
-//  Copyright © 2017 Proteus. All rights reserved.
+//  Copyright © 2017. All rights reserved.
 //
 
 import UIKit
@@ -27,6 +27,7 @@ class MovieDisplayViewController: UIViewController, UITableViewDelegate, UITable
         
         moviesTableView.delegate = self
         moviesTableView.dataSource = self
+        moviesTableView.backgroundColor = UIColor.yellow.withAlphaComponent(0.3)
         
         self.getMoviesAndUpdateTable()
         
@@ -47,7 +48,7 @@ class MovieDisplayViewController: UIViewController, UITableViewDelegate, UITable
     
     
     func getMoviesAndUpdateTable() {
-        self.presentIndicator()
+       // self.presentIndicator()
     }
     
     

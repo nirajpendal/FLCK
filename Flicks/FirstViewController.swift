@@ -11,6 +11,7 @@ import UIKit
 class FirstViewController: MovieDisplayViewController {
 
     override func getMoviesAndUpdateTable() {
+        self.presentIndicator()
         movieHelper.getNowPlayingMovies { [weak self] (moviesFromResponse, error) in
             
             if error != nil {

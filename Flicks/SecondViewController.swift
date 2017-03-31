@@ -13,6 +13,7 @@ class SecondViewController: MovieDisplayViewController {
     
     
     override func getMoviesAndUpdateTable() {
+        self.presentIndicator()
         movieHelper.getTopRatedMovies { [weak self] (moviesFromResponse, error) in
             
             if error != nil {
