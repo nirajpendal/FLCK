@@ -56,11 +56,44 @@
                     <navigationItem key="navigationItem" id="aCr-CC-trj"/>
                     <connections>
                         <outlet property="moviesTableView" destination="CzC-2Z-FzB" id="mwn-ux-Wiq"/>
+                        <segue destination="ogV-JX-KI7" kind="show" identifier="DetailsViewSegue" id="ZGA-iM-tjF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1688.8" y="-320.68965517241384"/>
+        </scene>
+        <!--Movie Details View Controller-->
+        <scene sceneID="mrU-QD-cKC">
+            <objects>
+                <viewController id="ogV-JX-KI7" customClass="MovieDetailsViewController" customModule="Flicks" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yTl-O6-rMO"/>
+                        <viewControllerLayoutGuide type="bottom" id="M4q-gb-Qc7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XvD-29-mt1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Q9-H2-uSi">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ug4-9U-taD">
+                                <rect key="frame" x="16" y="379" width="343" height="188"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="detailMovieArtImageView" destination="8Q9-H2-uSi" id="bgX-bk-g1D"/>
+                        <outlet property="scrollView" destination="Ug4-9U-taD" id="VIU-7D-qbU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uIG-vA-eHO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2431.1999999999998" y="-308.09595202398805"/>
         </scene>
         <!--Second View Controller-->
         <scene sceneID="wg7-f3-ORb">
@@ -121,11 +154,11 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--First-->
+        <!--Now Playing-->
         <scene sceneID="eRG-NB-JWV">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IfT-xB-JBc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Now Playing" image="first" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Ve-si-369">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -140,11 +173,11 @@
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
-        <!--Second-->
+        <!--Top Rated-->
         <scene sceneID="67a-cL-Q9Q">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eHa-hm-lbE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Top Rated" image="second" id="cPa-gy-q4n"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tyd-LB-Lc1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

@@ -18,6 +18,8 @@ struct Movie {
     var title:String
     var posterPath: String
     var overview: String
+    var releaseDate:String?
+    var popularity: String?
 }
 
 
@@ -68,7 +70,10 @@ class Movies {
                     let title = movieResult["title"] as! String
                     let overview = movieResult["overview"] as! String
                     let posterPath = imageBaseUrl + (movieResult["poster_path"] as! String)
-                    self?.nowPlayingMovies.append(Movie(title: title, posterPath: posterPath, overview: overview))
+                    let releaseDate = movieResult["release_date"] as? String
+                    let popularity = movieResult["popularity"] as? String
+                    
+                    self?.nowPlayingMovies.append(Movie(title: title, posterPath: posterPath, overview: overview, releaseDate:releaseDate, popularity:popularity))
                 }
                 
                 nowPlayingCallback((self?.nowPlayingMovies)!, nil)
@@ -77,6 +82,7 @@ class Movies {
                 
             })
         } else {
+            print("Giving Cached Value")
             nowPlayingCallback((self.nowPlayingMovies), nil)
         }
         

@@ -14,10 +14,15 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var moviesTableView: UITableView!
     var movieHelper = Movies()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    
+        self.moviesTableView.addSubview(refreshControl)
+        self.refreshControl.addTarget(self, action: #selector(refreshControlEvent), for: UIControlEvents.valueChanged)
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
         
         moviesTableView.delegate = self
         moviesTableView.dataSource = self
@@ -29,6 +34,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.activityIndicator.hidesWhenStopped = true
         self.view.addSubview(self.activityIndicator)
         
+    }
+    
+    func refreshControlEvent()  {
+        self.getMoviesAndUpdateTable()
     }
     
     func presentIndicator()  {
@@ -53,6 +62,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             
             self?.hideIndicator()
+            self?.refreshControl.endRefreshing()
         }
     }
     
@@ -60,6 +70,18 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let destinationViewController = segue.destination as? MovieDetailsViewController {
+            
+            if let cell = sender as? NowPlayingMovieCellTableViewCell {
+                destinationViewController.imageViewImage = cell.artWorkImageView.image
+                destinationViewController.movie = self.movieHelper.nowPlayingMovies[(self.moviesTableView.indexPath(for: cell)?.row)!]
+                
+            }   
+        }
     }
     
 }
@@ -80,6 +102,10 @@ extension FirstViewController {
         cell.artWorkImageView.setImageWith(URL(string: urlString)!)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "DetailsViewSegue", sender: tableView.cellForRow(at: indexPath))
     }
     
 }
