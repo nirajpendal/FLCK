@@ -9,17 +9,21 @@
 import UIKit
 import AFNetworking
 
-class MovieDisplayViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MovieDisplayViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var moviesTableView: UITableView!
     var movieHelper = Movies()
     var movies:[Movie] = []
+    var movieCopy:[Movie] = []
     let activityIndicator = ActivityIndicator()
     let refreshControl = UIRefreshControl()
+    let searchBar = UISearchBar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        createSearchBar()
         
         self.moviesTableView.addSubview(refreshControl)
         self.refreshControl.addTarget(self, action: #selector(refreshControlEvent), for: UIControlEvents.valueChanged)
@@ -31,6 +35,13 @@ class MovieDisplayViewController: UIViewController, UITableViewDelegate, UITable
         
         self.getMoviesAndUpdateTable()
         
+    }
+    
+    func createSearchBar()  {
+        self.searchBar.delegate = self
+        self.searchBar.placeholder = "Search Movie"
+        self.searchBar.showsCancelButton = false
+        self.navigationItem.titleView = self.searchBar
     }
     
     func refreshControlEvent()  {
@@ -68,6 +79,27 @@ class MovieDisplayViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
+    
+    func filterMovies(queryText:String) {
+        
+        var filteredMovies = self.movieCopy
+        
+        if queryText != "" {
+             filteredMovies = self.movieCopy.filter { $0.title.lowercased().contains(queryText.lowercased())}
+        }
+        
+        self.movies = filteredMovies
+        self.moviesTableView.reloadData()
+    }
+    
+}
+
+extension MovieDisplayViewController {
+    
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
+        filterMovies(queryText: searchText)
+    }
+    
 }
 
 extension MovieDisplayViewController {

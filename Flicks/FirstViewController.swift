@@ -14,6 +14,10 @@ class FirstViewController: MovieDisplayViewController {
         self.presentIndicator()
         movieHelper.getNowPlayingMovies { [weak self] (moviesFromResponse, error) in
             
+            guard let strongSelf = self else {
+                return
+            }
+            
             if error != nil {
                 // Present error dialog here..
                 print(error!.localizedDescription)
@@ -22,16 +26,17 @@ class FirstViewController: MovieDisplayViewController {
                 let okActionButton: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                 alertView.addAction(okActionButton)
                 
-                self?.present(alertView, animated: true, completion: nil)
+                strongSelf.present(alertView, animated: true, completion: nil)
                 
             } else {
                 print("Movies returned \(moviesFromResponse.count)")
-                self?.movies = moviesFromResponse
-                self?.moviesTableView.reloadData()
+                strongSelf.movies = moviesFromResponse
+                strongSelf.movieCopy = strongSelf.movies
+                strongSelf.moviesTableView.reloadData()
             }
             
-            self?.hideIndicator()
-            self?.refreshControl.endRefreshing()
+            strongSelf.hideIndicator()
+            strongSelf.refreshControl.endRefreshing()
         }
     }
     

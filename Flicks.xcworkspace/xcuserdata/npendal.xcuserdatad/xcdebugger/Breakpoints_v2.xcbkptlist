@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Flicks/MovieDisplayViewController.swift"
-            timestampString = "512658998.848203"
+            timestampString = "512712483.696783"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "presentIndicator()"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "createSearchBar()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Flicks/MovieDisplayViewController.swift"
-            timestampString = "512658998.848203"
+            timestampString = "512712483.696783"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "getMoviesAndUpdateTable()"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "presentIndicator()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
