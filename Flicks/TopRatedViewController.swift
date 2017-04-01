@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SecondViewController.swift
 //  Flicks
 //
 //  Created by Niraj Pendal on 3/27/17.
@@ -8,14 +8,16 @@
 
 import UIKit
 
-class FirstViewController: MovieDisplayViewController {
 
+class TopRatedViewController: MovieDisplayViewController {
+    
     override func getMoviesAndUpdateTable() {
         self.presentIndicator()
-        movieHelper.getNowPlayingMovies { [weak self] (moviesFromResponse, error) in
-            
+        movieHelper.getTopRatedMovies { [weak self] (moviesFromResponse, error) in
             self?.resultReturned(movieResults: moviesFromResponse, error: error)
         }
     }
-    
+
+
 }
+
